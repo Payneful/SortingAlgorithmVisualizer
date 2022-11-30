@@ -18,8 +18,11 @@ def bubble_sort():
     n = len(lst)
     for i in range(n):
         for j in range(0, n-i-1):
-            plt.bar(x, lst)
-            plt.pause(0.000001) 
+            plt.subplot(2,1,1)
+            plt.bar(list(range(amount)), lst)
+            plt.subplot(2,1,2)
+            plt.plot(lst)
+            plt.pause(0.000001)
             plt.clf()
             if lst[j] > lst[j+1]:
                 lst[j], lst[j+1] = lst[j+1], lst[j]
@@ -27,7 +30,12 @@ def bubble_sort():
     
     ptime2 = time.perf_counter()
 
+    plt.subplot(2,1,1)
     plt.bar(list(range(amount)), lst)
+    plt.subplot(2,1,2)
+    plt.plot(lst)
+    plt.pause(0.000001)
+    plt.clf()
 
     return ptime2 - ptime - (count * 0.001)
 
@@ -40,7 +48,10 @@ def merge_sort(numbers_list, left, right):
 
     mid = (left + right) // 2
 
+    plt.subplot(2,1,1)
     plt.bar(list(range(amount)), numbers_list)
+    plt.subplot(2,1,2)
+    plt.plot(numbers_list)
     plt.pause(0.000001)
     plt.clf()
 
@@ -90,7 +101,12 @@ def merge_sort_graph():
     count = merge_sort(numbers, 0, len(numbers) - 1)
     ptime2 = time.perf_counter()
     
+    plt.subplot(2,1,1)
     plt.bar(x, numbers)
+    plt.subplot(2,1,2)
+    plt.plot(numbers)
+    plt.pause(0.000001)
+    plt.clf()
 
     return ptime2 - ptime
 
@@ -112,7 +128,10 @@ def high_selection_sort():
                     biggest = list[jPivot]
                     index = jPivot
 
+                plt.subplot(2,1,1)
                 plt.bar(x, list)
+                plt.subplot(2,1,2)
+                plt.plot(list)
                 plt.pause(0.000001)
                 plt.clf()
             
@@ -126,7 +145,12 @@ def high_selection_sort():
 
     ptime2 = time.perf_counter()
 
+    plt.subplot(2,1,1)
     plt.bar(x, list)
+    plt.subplot(2,1,2)
+    plt.plot(list)
+    plt.pause(0.000001)
+    plt.clf()
 
     return ptime2 - ptime - (count * 0.001)
 
@@ -137,6 +161,11 @@ def sort():
     array = [random.randint(0, 1000) for _ in range(amount)]
     ptime = time.perf_counter()
     sort_recursive(array, 0, len(array) - 1)
+    previous = 0
+    for num in array:
+        if previous > num:
+            sort_recursive(array, 0, len(array) - 1)
+        previous = num
     ptime2 = time.perf_counter()
 
     return ptime2 - ptime
@@ -148,8 +177,11 @@ def sort_recursive(array, i_begin, i_end):
     
     i_pivot = segregate(array, i_begin, i_end)
 
+    plt.subplot(2,1,1)
     plt.bar(list(range(amount)), array)
-
+    plt.subplot(2,1,2)
+    plt.plot(array)
+    plt.pause(0.000001)
     plt.clf()
     
     sort_recursive(array, i_begin, i_pivot - 1)
@@ -167,12 +199,20 @@ def segregate(array, i_begin, i_end):
     while i_up < i_down:
         while i_up < i_down and array[i_up] < array[i_pivot]:
             i_up += 1
+            plt.subplot(2,1,1)
             plt.bar(list(range(amount)), array)
+            plt.subplot(2,1,2)
+            plt.plot(array)
             plt.pause(0.000001)
             plt.clf()
+
+
         while i_up < i_down and array[i_down] >= array[i_pivot]:
             i_down -= 1
+            plt.subplot(2,1,1)
             plt.bar(list(range(amount)), array)
+            plt.subplot(2,1,2)
+            plt.plot(array)
             plt.pause(0.000001)
             plt.clf()
         
@@ -183,7 +223,10 @@ def segregate(array, i_begin, i_end):
                 i_pivot = i_down
             array[i_up], array[i_down] = array[i_down], array[i_up]
 
+        plt.subplot(2,1,1)
         plt.bar(list(range(amount)), array)
+        plt.subplot(2,1,2)
+        plt.plot(array)
         plt.pause(0.000001)
         plt.clf()
     
@@ -192,38 +235,42 @@ def segregate(array, i_begin, i_end):
 
 def main():
     """Runs each sort that will graph and tell timing"""
+    sort_times = 2
+
     perf_time = 0
     best_perf_time = 0
-    for i in range(3):
+    for i in range(sort_times):
         if perf_time < best_perf_time or best_perf_time == 0:
             best_perf_time = perf_time
         perf_time += bubble_sort()
-    print(f"Average Bubble Sort Time: {perf_time/3:0.4f} seconds")
+    print(f"Average Bubble Sort Time: {perf_time/sort_times:0.4f} seconds")
     print(f"Best Bubble Sort Time: {best_perf_time:0.4f} seconds")
 
     perf_time = 0
     best_perf_time = 0
-    for i in range(3):
+    for i in range(sort_times):
         if perf_time < best_perf_time or best_perf_time == 0:
             best_perf_time = perf_time
         perf_time += merge_sort_graph()
-    print(f"Average Merge Sort Time: {perf_time/3:0.4f} seconds")
+    print(f"Average Merge Sort Time: {perf_time/sort_times:0.4f} seconds")
     print(f"Best Merge Sort Time: {best_perf_time:0.4f} seconds")
 
     perf_time = 0
     best_perf_time = 0
-    for i in range(3):
+    for i in range(sort_times):
         if perf_time < best_perf_time or best_perf_time == 0:
             best_perf_time = perf_time
         perf_time += high_selection_sort()
-    print(f"Average Selection Sort Time: {perf_time/3:0.4f} seconds")
+    print(f"Average Selection Sort Time: {perf_time/sort_times:0.4f} seconds")
     print(f"Best Selection Sort Time: {best_perf_time:0.4f} seconds")
 
-    for i in range(3):
+    perf_time = 0
+    best_perf_time = 0
+    for i in range(sort_times):
         if perf_time < best_perf_time or best_perf_time == 0:
             best_perf_time = perf_time
         perf_time += sort()
-    print(f"Average Segregation Sort Time: {perf_time/3:0.4f} seconds")
+    print(f"Average Segregation Sort Time: {perf_time/sort_times:0.4f} seconds")
     print(f"Best Segregation Sort Time: {best_perf_time:0.4f} seconds")
     
 
