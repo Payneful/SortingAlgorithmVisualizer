@@ -235,12 +235,12 @@ def segregate(array, i_begin, i_end):
 
 def main():
     """Runs each sort that will graph and tell timing"""
-    sort_times = 2
+    sort_times = 1
 
     perf_time = 0
     best_perf_time = 0
     for i in range(sort_times):
-        if perf_time < best_perf_time or best_perf_time == 0:
+        if perf_time < best_perf_time or best_perf_time < 0.001:
             best_perf_time = perf_time
         perf_time += bubble_sort()
     print(f"Average Bubble Sort Time: {perf_time/sort_times:0.4f} seconds")
@@ -249,7 +249,7 @@ def main():
     perf_time = 0
     best_perf_time = 0
     for i in range(sort_times):
-        if perf_time < best_perf_time or best_perf_time == 0:
+        if perf_time < best_perf_time or best_perf_time < 0.001:
             best_perf_time = perf_time
         perf_time += merge_sort_graph()
     print(f"Average Merge Sort Time: {perf_time/sort_times:0.4f} seconds")
@@ -258,20 +258,20 @@ def main():
     perf_time = 0
     best_perf_time = 0
     for i in range(sort_times):
-        if perf_time < best_perf_time or best_perf_time == 0:
+        if perf_time < best_perf_time or best_perf_time < 0.001:
             best_perf_time = perf_time
         perf_time += high_selection_sort()
     print(f"Average Selection Sort Time: {perf_time/sort_times:0.4f} seconds")
     print(f"Best Selection Sort Time: {best_perf_time:0.4f} seconds")
 
-    perf_time = 0
-    best_perf_time = 0
-    for i in range(sort_times):
-        if perf_time < best_perf_time or best_perf_time == 0:
-            best_perf_time = perf_time
-        perf_time += sort()
-    print(f"Average Segregation Sort Time: {perf_time/sort_times:0.4f} seconds")
-    print(f"Best Segregation Sort Time: {best_perf_time:0.4f} seconds")
+    # perf_time = 0
+    # best_perf_time = 0
+    # for i in range(sort_times):
+    #     if perf_time < best_perf_time or best_perf_time < 0.001:
+    #         best_perf_time = perf_time
+    #     perf_time += sort()
+    # print(f"Average Segregation Sort Time: {perf_time/sort_times:0.4f} seconds")
+    # print(f"Best Segregation Sort Time: {best_perf_time:0.4f} seconds")
     
 
 if __name__ == "__main__":
