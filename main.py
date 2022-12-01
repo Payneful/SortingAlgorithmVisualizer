@@ -3,7 +3,7 @@ import numpy as np
 import random
 import time
 
-amount = 25
+amount = 10
 random.seed("ABC")
 x = np.arange(0, amount, 1)
 count = 0
@@ -95,10 +95,9 @@ def merge(numbers_list, left, right, mid):
 
 def merge_sort_graph():
     """Sets up merge sort and timings"""
-    count = 0
     numbers = [random.randint(0, 1000) for _ in range(amount)]
     ptime = time.perf_counter()
-    count = merge_sort(numbers, 0, len(numbers) - 1)
+    merge_sort(numbers, 0, len(numbers) - 1)
     ptime2 = time.perf_counter()
     
     plt.subplot(2,1,1)
@@ -235,7 +234,7 @@ def segregate(array, i_begin, i_end):
 
 def main():
     """Runs each sort that will graph and tell timing"""
-    sort_times = 1
+    sort_times = 2
 
     perf_time = 0
     best_perf_time = 0

@@ -5,7 +5,7 @@ I wanted to visually see what was happening with the sorts and how they are chan
 pip install matplotlib numpy
 ```
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/lMzDT-wfZ7c)
 
 # Development Environment
 
